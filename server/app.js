@@ -20,11 +20,14 @@ app.use(express.static('uploads'));
 //main api calling routes
 
 //app.use('/api', handleUserRequest)
-app.use('/api', async (req, res) => {
-    const generatedQuery = await handleUserRequest(req, res);
-    console.log("Generated Query:", generatedQuery);
+app.use('/api/chat', async (req, res) => {
+    //console.log(req.body)
+    const userQuery = req.body.query;
+    //console.log("Received query:", userQuery);
+    const generatedQuery = await handleUserRequest(userQuery);
+    //console.log("Generated Query:", generatedQuery);
     const handleSQLdata = await queryFunction(generatedQuery);
-    console.log("SQL Data:", handleSQLdata);
+    //console.log("SQL Data:", handleSQLdata);
     const finalResult = await aiResponse(req.body.query, handleSQLdata);
     //console.log("Final Result:", finalResult);
     res.send(finalResult);

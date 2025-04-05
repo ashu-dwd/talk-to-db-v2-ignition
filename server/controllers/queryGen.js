@@ -2,9 +2,9 @@ require("dotenv").config();
 const { GoogleGenAI } = require('@google/genai');
 
 
-const handleUserRequest = async (req, res) => {
+const handleUserRequest = async (query) => {
     try {
-        const { query } = req.body;
+        //console.log("Received query:", req.body.query);
         const apiKey = process.env.GOOGLE_API_KEY;
         const ai = new GoogleGenAI({ apiKey: apiKey });
         const aiPrompt = process.env.AI_PROMPT;
@@ -22,12 +22,11 @@ const handleUserRequest = async (req, res) => {
             return input.replace(/^```json\s+|\s*```$/g, '');
         }
 
-        //console.log(JSON.parse(cleanQueryString(result)))
+        console.log(JSON.parse(cleanQueryString(result)))
         return JSON.parse(cleanQueryString(result));
 
     } catch (err) {
         console.error("Error in handleUserRequest:", err);
-        res.status(500).json({ error: 'Internal Server Error' });
     }
 }
 

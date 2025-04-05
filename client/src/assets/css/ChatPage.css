@@ -1,0 +1,260 @@
+/* ChatPage.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fb;
+  color: #333;
+}
+
+.chat-container {
+  max-width: 800px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  padding: 20px;
+  background: linear-gradient(to right, #4776e6, #8e54e9);
+  color: white;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.welcome-message {
+  text-align: center;
+  margin: auto;
+  color: #888;
+}
+
+.welcome-message h2 {
+  margin-bottom: 10px;
+  color: #4776e6;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  padding: 12px 16px;
+  max-width: 80%;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.message.user .message-bubble {
+  background-color: #4776e6;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.message.ai .message-bubble {
+  background-color: #f0f2f5;
+  color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+.message.ai .message-bubble p,
+.message.ai .message-bubble div {
+  white-space: pre-wrap;
+}
+
+/* Style for HTML content */
+.message.ai .message-bubble div {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Style error messages */
+.message.ai.error .message-bubble {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.timestamp {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 5px;
+  display: block;
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  padding: 15px;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input input:focus {
+  border-color: #4776e6;
+  box-shadow: 0 0 0 2px rgba(71, 118, 230, 0.1);
+}
+
+.chat-input button {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  background-color: #4776e6;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.chat-input button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+.chat-input button:hover:not(:disabled) {
+  background-color: #3767d7;
+}
+
+.chat-input button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Loading indicators */
+.typing-indicator {
+  display: flex;
+  padding: 5px;
+}
+
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  background-color: #888;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 2px;
+  animation: bounce 1.3s linear infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Make HTML content responsive */
+.message.ai .message-bubble div img {
+  max-width: 100%;
+  height: auto;
+}
+
+.message.ai .message-bubble div pre {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.message.ai .message-bubble div table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.message.ai .message-bubble div table th,
+.message.ai .message-bubble div table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .chat-container {
+    height: 100vh;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .message-bubble {
+    max-width: 90%;
+  }
+
+  .chat-header h1 {
+    font-size: 1.2rem;
+  }
+}
