@@ -37,7 +37,7 @@ function ChatLayout() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({ userInput: input }),
       });
 
       const data = await response.json();
@@ -46,7 +46,7 @@ function ChatLayout() {
       if (data.success) {
         // Add AI response to chat
         const aiMessage = {
-          html: data.mainOutput, // Store HTML response
+          text: data.mainOutput, // Store HTML response
           sender: "ai",
           timestamp: new Date().toLocaleTimeString(),
         };
@@ -95,11 +95,10 @@ function ChatLayout() {
               }`}
             >
               <div className="message-bubble">
-                {message.html ? (
-                  <div dangerouslySetInnerHTML={{ __html: message.html }} />
-                ) : (
+                
+                
                   <p>{message.text}</p>
-                )}
+                
                 <span className="timestamp">{message.timestamp}</span>
               </div>
             </div>
