@@ -1,0 +1,100 @@
+/* Global CSS for basic UI design */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; /* Light gray background */
+  color: #333; /* Dark text color */
+  line-height: 1.6;
+}
+
+/* Common margin */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Button styling */
+button {
+  background-color: #007bff; /* Blue button color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Input styling */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px; /* Rounded corners */
+  box-sizing: border-box;
+}
+
+/* Heading styling */
+h1, h2, h3 {
+  color: #007bff; /* Blue heading color */
+  margin-bottom: 10px;
+}
+
+/* Link styling */
+a {
+  color: #007bff; /* Blue link color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: underline;
+}
+
+/* Additional styling for content sections */
+.section {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation bar styling */
+.nav-bar {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.nav-bar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.nav-bar li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.nav-bar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-bar a:hover {
+  color: #007bff;
+}
