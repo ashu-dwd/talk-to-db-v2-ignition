@@ -14,10 +14,12 @@
   "type": "commonjs",
   "dependencies": {
     "@google/genai": "^0.7.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
-    "mongoose": "^8.13.1",
-    "mysql2": "^3.14.0"
+    "mongoose": "^8.13.2",
+    "mysql2": "^3.14.0",
+    "nanoid": "^5.1.5"
   }
 }
