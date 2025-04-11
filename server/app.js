@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const { nanoid } = require('nanoid');
+const { nanoid } = await import('nanoid');
 
 const handleUserRequest = require('./controllers/queryGen');
 const aiResponse = require('./controllers/aiResponse');
