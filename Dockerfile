@@ -4,19 +4,22 @@ FROM node:18
 # Set working directory
 WORKDIR /app
 
-# Copy server and client package files
+# Copy package files first
 COPY server/package*.json ./server/
 COPY client/package*.json ./client/
 
-# Install dependencies for both
+# Install dependencies
 RUN cd server && npm install
-RUN cd client && npm install && npm run build
+RUN cd client && npm install
 
-# Copy entire project files
+# Now copy all project files
 COPY server/ ./server/
 COPY client/ ./client/
 
-# Copy built client to server public directory (assuming Express serves static from /public or /client/dist)
+# Build client
+RUN cd client && npm run build
+
+# Copy built client to server/public
 RUN cp -r ./client/dist ./server/public
 
 # Set working directory to server
