@@ -42,8 +42,13 @@ app.post('/api/chat/:roomId', async (req, res) => {
         }
 
         const generatedQuery = await handleUserRequest(userQuery);
+        console.log("Generated Query:", generatedQuery);
         const sqlResult = await queryFunction(generatedQuery);
+        console.log("mysqldb output:", sqlResult);
         const finalResponse = await aiResponse(userQuery, sqlResult);
+        console.log("AI Response:", finalResponse);
+
+
 
         console.log(`Processing message in room: ${roomId}`);
 
@@ -80,7 +85,7 @@ app.post('/api/chat', async (req, res) => {
             aiResponse: finalResponse
         });
 
-        res.json({ finalResponse, roomId });
+        res.json({ finalResponse, roomId, generatedQuery: generatedQuery.message });
     } catch (error) {
         console.error('❌ Error in /api/chat:', error);
         res.status(500).json({ error: 'Internal server error' });
