@@ -31,14 +31,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use('/api', require('./routes/api'));
-app.use('/user', require('./routes/user'));
-app.use('/api/post', require('./routes/post'));
-
-
-app.get('/', (req, res) => {
-    res.send('👋 Welcome to the API!');
-});
-
 
 
 app.listen(PORT, () => {
