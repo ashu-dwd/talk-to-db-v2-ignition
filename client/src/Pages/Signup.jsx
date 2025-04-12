@@ -22,7 +22,7 @@ function Signup() {
       return;
     }
     axios
-      .post("http://localhost:3000/user/signup", { name, email, password })
+      .post("http://localhost:5000/user/signup", { name, email, password })
       .then((response) => {
         console.log("Signup successful:", response.data);
         alert(response.data.msg);

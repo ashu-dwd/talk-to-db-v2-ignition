@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // ✅ Correct way to navigate
+  const navigate = useNavigate();
 
   const handleFormSubmission = (event) => {
     event.preventDefault();
@@ -15,11 +16,13 @@ function Login() {
     setError(null);
 
     axios
-      .post("http://localhost:3000/user/login", { email, password })
+      .post("http://localhost:5000/user/login", { email, password })
       .then((response) => {
         console.log("Login successful:", response.data);
         alert("Login successful!");
-        navigate("/chat"); // ✅ Redirect to chat
+        const roomId = nanoid(10);
+        localStorage.setItem("roomId", roomId);
+        navigate(`/interface/${roomId}`);
       })
       .catch((error) => {
         console.error("Login failed:", error);
