@@ -1,35 +1,124 @@
-/* Navigation styles */
-nav {
-  background-color: #333;
-  padding: 15px 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+/* Reset the existing navbar styling */
+.navbar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 15px 40px !important;
+  background-color: #fff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
 }
 
-.nav-link {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  margin-right: 15px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  display: inline-block;
+/* Logo styling */
+.navbar .logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
 }
 
-.nav-link:hover {
-  background-color: #555;
-  transform: translateY(-2px);
+.navbar .logo h1 {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin: 0 !important;
 }
 
-.nav-link:active {
-  background-color: #444;
-  transform: translateY(0);
+.navbar .logo-icon {
+  color: #4a90e2 !important;
+  font-size: 24px !important;
 }
 
-/* Remove <br> tags and style links to be inline */
-nav br {
-  display: none;
+/* Navigation links container */
+.navbar .nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 25px !important;
+}
+
+/* Basic link styling */
+.navbar .nav-links a {
+  color: #555 !important;
+  text-decoration: none !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  gap: 2.5 rem !important;
+  transition: color 0.3s ease !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-block !important;
+  transform: none !important;
+}
+
+.navbar .nav-links a:hover {
+  color: #4a90e2 !important;
+  background-color: transparent !important;
+  transform: none !important;
+}
+
+/* Login button */
+.navbar .login-btn {
+  padding: 8px 18px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  background-color: #f0f5ff !important;
+  color: #4a90e2 !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.navbar .login-btn:hover {
+  background-color: #e0eaff !important;
+  transform: none !important;
+}
+
+/* Sign up button */
+.navbar .signup-btn {
+  padding: 8px 18px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  background-color: #4a90e2 !important;
+  color: white !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.navbar .signup-btn:hover {
+  background-color: #3a7bc8 !important;
+  transform: none !important;
+}
+
+/* Override any nav class from your previous CSS */
+nav.navbar {
+  background-color: #fff !important;
+  padding: 15px 40px !important;
+}
+/* Sign Up button specific styling */
+.navbar .signup-btn,
+.navbar .nav-links .signup-btn,
+.signup-btn,
+a.signup-btn {
+  padding: 8px 20px !important;
+  border-radius: 4px !important;
+  font-weight: 500 !important;
+  background-color: #4a90e2 !important;
+  color: white !important;
+  text-decoration: none !important;
+  transition: background-color 0.3s ease !important;
+  display: inline-block !important;
+}
+
+.navbar .signup-btn:hover,
+.navbar .nav-links .signup-btn:hover,
+.signup-btn:hover,
+a.signup-btn:hover {
+  background-color: #3a7bc8 !important;
+  color: white !important;
+}
+
+/* Ensure primary button class is also styled */
+.primary-btn,
+.navbar .primary-btn,
+a.primary-btn {
+  background-color: #4a90e2 !important;
+  color: white !important;
 }

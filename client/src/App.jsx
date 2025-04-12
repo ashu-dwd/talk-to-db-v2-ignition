@@ -1,7 +1,7 @@
 import ChatLayout from "./Pages/ChatLayout";
 import HomePage from "./Pages/Home";
 import { Database } from "lucide-react";
-import "./assets/css/Home.css";
+import "./assets/css/Nav.css";
 //import Home from "./Pages/Home";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Signup from "./Pages/Signup";
@@ -20,7 +20,7 @@ const App = () => {
           <div className="nav-links">
             <a href="#features">Features</a>
             <a href="#security">Security</a>
-            <a href="#how-it-works">How It Works</a>
+            <a href="#how-it-works">Working</a>
             <a href="#pricing">Pricing</a>
             <a href="#contact">Contact</a>
             <Link to="/login" className="login-btn">

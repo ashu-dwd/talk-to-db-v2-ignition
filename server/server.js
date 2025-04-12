@@ -31,7 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('uploads'));
 app.use('/api', require('./routes/api'));
+app.use('/user', require('./routes/user'));
 
+app.get('/', (req, res) => {
+    res.send('👋 Welcome to the API!');
+});
+
+// Start Server
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
