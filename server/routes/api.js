@@ -16,6 +16,12 @@ router.post('/chat/:roomId', async (req, res) => {
         // }
         const generatedQuery = await handleUserRequest(userQuery);
         console.log("Generated Query:", generatedQuery);
+        if (generatedQuery.message.length > 10) {
+            const finalResponse = {
+                mainOutput: generatedQuery.message,
+            }
+            res.json({ finalResponse, roomId });
+        }
         const sqlResult = await queryFunction(generatedQuery);
         console.log("mysqldb output:", sqlResult);
         const finalResponse = await aiResponse(userQuery, sqlResult);
