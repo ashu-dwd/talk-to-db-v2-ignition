@@ -11,9 +11,9 @@ router.post('/chat/:roomId', async (req, res) => {
     const roomId = req.params.roomId;
     const isRoomExists = await Chat.findOne({ roomId: roomId });
     try {
-        if (!isRoomExists) {
-            return res.status(404).json({ error: 'Chat room not found' });
-        }
+        // if (!isRoomExists) {
+        //     return res.status(404).json({ error: 'Chat room not found' });
+        // }
         const generatedQuery = await handleUserRequest(userQuery);
         console.log("Generated Query:", generatedQuery);
         const sqlResult = await queryFunction(generatedQuery);
@@ -47,7 +47,7 @@ router.get('/chat/:roomId', async (req, res) => {
         const chats = await Chat.find({ roomId: roomId }).sort({ createdAt: 1 });
 
         if (!chats || chats.length === 0) {
-            return res.status(404).json({ error: 'Chat not found' });
+            return res.status(200).json({ message: 'Hit mic button to communicate with database' });
         }
 
         // Format the conversation history for the frontend

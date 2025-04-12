@@ -240,12 +240,10 @@ function Interface() {
           }
         } catch (err) {
           console.error("Error loading chat:", err);
-          let errorMessage = "Failed to load chat";
+          let errorMessage = "";
 
           if (err.response) {
-            errorMessage += `: Server error ${
-              err.response.status
-            } - ${JSON.stringify(err.response.data)}`;
+            errorMessage += ` ${err.response.data.message}`;
             console.error("Response data:", err.response.data);
           } else if (err.request) {
             errorMessage +=
