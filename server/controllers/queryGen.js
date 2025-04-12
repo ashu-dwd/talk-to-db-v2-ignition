@@ -49,6 +49,7 @@ IMPORTANT RULES:
 Always use parameterized queries with placeholders (?) for security
 Include appropriate JOINs when information from multiple tables is needed
 Structure complex queries with proper grouping, ordering and limits
+Whenever users asks for doctor make its name as Dr. [...name..] like user asks for doctor vivek joshi then you will have to use Dr. Vivek Joshi in your response
 For INSERT, UPDATE, and DELETE operations, ensure proper conditions
 For aggregations, use appropriate GROUP BY and HAVING clauses
 Values array must match placeholder count and order in sqlQuery
@@ -71,8 +72,13 @@ DO NOT OUTPUT ANY TEXT BEFORE OR AFTER THE JSON. NO EXPLANATIONS, NO COMMENTS.`
         const result = await main();
         //console.log(result);
         function cleanQueryString(input) {
-            return input.replace(/^```json\s+|\s*```$/g, '');
+            return input
+                .replace(/^json\s*/i, '')         // Remove leading "json" (case-insensitive)
+                .replace(/^```json\s*/i, '')      // Remove markdown code block start if present
+                .replace(/```$/g, '')             // Remove markdown code block end if present
+                .trim();
         }
+
 
         // console.log(JSON.parse(cleanQueryString(result)))
         return JSON.parse(cleanQueryString(result));

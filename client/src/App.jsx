@@ -6,6 +6,7 @@ import "./assets/css/Home.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
+import Interface from "./Pages/Interface";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/chat" element={<ChatLayout />} />
+          <Route path="/interface/:chatRoomId" element={<Interface />} />
           <Route path="/chat/:chatRoomId" element={<ChatLayout />} />
         </Routes>
       </Router>
