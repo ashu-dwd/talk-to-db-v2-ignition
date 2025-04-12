@@ -15,7 +15,7 @@ function Login() {
     setError(null);
 
     axios
-      .post("http://localhost:3000/user/login", { email, password })
+      .post("http://localhost:5000/user/login", { email, password })
       .then((response) => {
         console.log("Login successful:", response.data);
         alert("Login successful!");
