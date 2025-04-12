@@ -85,7 +85,7 @@ app.post('/api/chat', async (req, res) => {
             aiResponse: finalResponse
         });
 
-        res.json({ finalResponse, roomId });
+        res.json({ finalResponse, roomId, generatedQuery: generatedQuery.message });
     } catch (error) {
         console.error('❌ Error in /api/chat:', error);
         res.status(500).json({ error: 'Internal server error' });

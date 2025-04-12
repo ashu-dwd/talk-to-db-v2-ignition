@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../assets/css/ChatPage.css";
 import { useParams, useNavigate } from "react-router-dom";
+import { StopIcon, SendIcon, MicActiveIcon, MicInactiveIcon } from "./icons";
 
 function ChatLayout() {
   const [messages, setMessages] = useState([]);
@@ -8,6 +9,8 @@ function ChatLayout() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
   const [roomId, setRoomId] = useState("");
+  const [listening, setListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const { roomId: routeRoomId } = useParams();
   const navigate = useNavigate();
 
@@ -97,12 +100,64 @@ function ChatLayout() {
     }
   }, [routeRoomId]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+  // Voice feature function - fixed to properly submit after listening
+  const handleVoiceFeature = () => {
+    if (!listening) {
+      setListening(true);
+
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        console.error("Speech Recognition not supported.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      window.recognitionInstance = recognition;
+
+      recognition.lang = "en-US";
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      let finalTranscript = "";
+
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        finalTranscript = transcript;
+        setInput(transcript);
+      };
+
+      recognition.onend = () => {
+        setListening(false);
+
+        if (finalTranscript.trim()) {
+          // Fixed: Call submitMessage instead of handleSubmit
+          submitMessage(finalTranscript);
+        }
+      };
+    } else {
+      setListening(false);
+      if (window.recognitionInstance) {
+        window.recognitionInstance.stop();
+      }
+    }
+  };
+
+  // New function to handle message submission without requiring an event
+  const submitMessage = async (messageText) => {
+    if (!messageText.trim()) return;
+
+    // Stop any ongoing speech when sending a new message
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+    }
 
     const userMessage = {
-      text: input,
+      text: messageText,
       sender: "user",
       timestamp: new Date().toLocaleTimeString(),
     };
@@ -124,7 +179,7 @@ function ChatLayout() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({ query: messageText }),
       });
 
       if (!response.ok) {
@@ -146,8 +201,7 @@ function ChatLayout() {
           typeof data.finalResponse === "object" &&
           data.finalResponse.success
         ) {
-          messageText =
-            data.finalResponse.mainOutput || "Request processed successfully";
+          messageText = data.finalResponse.mainOutput || data.generatedQuery;
         } else {
           messageText = JSON.stringify(data.finalResponse);
         }
@@ -166,41 +220,88 @@ function ChatLayout() {
         };
 
         setMessages((prev) => [...prev, aiMessage]);
+
+        // Speak the AI response
+        speakText(stripHTML(messageText));
       } else if (data.error) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            text: data.error,
-            sender: "ai",
-            timestamp: new Date().toLocaleTimeString(),
-            isError: true,
-          },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            text: "Received an unexpected response format from the server.",
-            sender: "ai",
-            timestamp: new Date().toLocaleTimeString(),
-            isError: true,
-          },
-        ]);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          text: `Error: ${error.message}`,
+        const errorMessage = {
+          text: data.error,
           sender: "ai",
           timestamp: new Date().toLocaleTimeString(),
           isError: true,
-        },
-      ]);
+        };
+
+        setMessages((prev) => [...prev, errorMessage]);
+
+        // Speak the error message too
+        speakText(stripHTML(data.error));
+      } else {
+        const unexpectedMessage = {
+          text: "Received an unexpected response format from the server.",
+          sender: "ai",
+          timestamp: new Date().toLocaleTimeString(),
+          isError: true,
+        };
+
+        setMessages((prev) => [...prev, unexpectedMessage]);
+
+        // Speak the unexpected response message
+        speakText("Received an unexpected response format from the server.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      const errorMessage = {
+        text: `Error: ${error.message}`,
+        sender: "ai",
+        timestamp: new Date().toLocaleTimeString(),
+        isError: true,
+      };
+
+      setMessages((prev) => [...prev, errorMessage]);
+
+      // Speak the error message
+      speakText(`Error: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Enhanced text to speech feature with state tracking
+  const speakText = (text) => {
+    if ("speechSynthesis" in window) {
+      // Cancel any previous speech
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "hi-IN"; // Changed from 'hi-IN' to 'en-US' for English
+
+      // Update state when speech starts and ends
+      setIsSpeaking(true);
+
+      utterance.onend = () => {
+        setIsSpeaking(false);
+      };
+
+      utterance.onerror = () => {
+        setIsSpeaking(false);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.warn("Text-to-Speech is not supported in this browser.");
+    }
+  };
+
+  const stripHTML = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    return div.textContent || div.innerText || "";
+  };
+
+  // Modified form submission to use the new submitMessage function
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitMessage(input);
   };
 
   return (
@@ -247,15 +348,41 @@ function ChatLayout() {
           placeholder="Type your message..."
           disabled={isLoading}
         />
-        <button type="submit" disabled={isLoading || !input.trim()}>
+        <button
+          type="submit"
+          disabled={isLoading || !input.trim()}
+          className="send-button"
+          aria-label="Send message"
+        >
+          {isLoading ? <span className="spinner"></span> : <SendIcon />}
+        </button>
+        <button
+          type="button"
+          onClick={handleVoiceFeature}
+          className={`mic-button ${listening ? "active" : ""}`}
+          aria-label={listening ? "Stop listening" : "Start voice input"}
+        >
           {isLoading ? (
             <span className="spinner"></span>
+          ) : listening ? (
+            <MicActiveIcon />
           ) : (
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-            </svg>
+            <MicInactiveIcon />
           )}
         </button>
+        {isSpeaking && (
+          <button
+            type="button"
+            onClick={() => {
+              window.speechSynthesis.cancel();
+              setIsSpeaking(false);
+            }}
+            className="stop-speech-button"
+            aria-label="Stop speech"
+          >
+            <StopIcon />
+          </button>
+        )}
       </form>
     </div>
   );
