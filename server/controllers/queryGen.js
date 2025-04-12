@@ -16,7 +16,7 @@ json{
   "sqlQuery": "",
   "values": [],
   "success": false,
-  "message": "Error: [specific reason why query cannot be generated highly important] else write nothing in this field. if user is asking some questions to you you can add your response here . also use this for user greetings]"
+  "message": " [specific reason why query cannot be generated highly important] else write nothing in this field. if user is asking some questions to you you can add your response here . also use this for user greetings]"
 }
 DATABASE SCHEMA:
 
