@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const { nanoid } = await import('nanoid');
+const { nanoid } = require('nanoid');
 
 const handleUserRequest = require('./controllers/queryGen');
 const aiResponse = require('./controllers/aiResponse');
@@ -42,8 +42,13 @@ app.post('/api/chat/:roomId', async (req, res) => {
         }
 
         const generatedQuery = await handleUserRequest(userQuery);
+        console.log("Generated Query:", generatedQuery);
         const sqlResult = await queryFunction(generatedQuery);
+        console.log("mysqldb output:", sqlResult);
         const finalResponse = await aiResponse(userQuery, sqlResult);
+        console.log("AI Response:", finalResponse);
+
+
 
         console.log(`Processing message in room: ${roomId}`);
 
