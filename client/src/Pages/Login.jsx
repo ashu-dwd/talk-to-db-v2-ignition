@@ -1,71 +1,87 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../Context/authContext.jsx";
 import axios from "axios";
-import "../assets/css/login.css";
-import { Link, useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
+import "../assets/css/login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { login } = useAuth(); // Auth context
   const navigate = useNavigate();
 
-  const handleFormSubmission = (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
     setLoading(true);
-    setError(null);
 
-    axios
-      .post("http://localhost:5000/user/login", { email, password })
-      .then((response) => {
-        console.log("Login successful:", response.data);
-        alert("Login successful!");
+    if (!email || !password) {
+      setError("Email and password are required");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/user/login", {
+        email,
+        password,
+      });
+      const { status, user, token, message } = response.data;
+
+      if (status === "success" && user && token) {
+        login(user, token); // Store in global context
         const roomId = nanoid(10);
         localStorage.setItem("roomId", roomId);
         navigate(`/interface/${roomId}`);
-      })
-      .catch((error) => {
-        console.error("Login failed:", error);
-        setError("Login failed. Please try again.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      } else {
+        setError(message || "Login failed. Please check your credentials.");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(
+        err.response?.data?.message || "An error occurred during login."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="login-container">
-      {error && <div className="error-message">{error}</div>}
       <h1>Login</h1>
-      <form className="login-form" onSubmit={handleFormSubmission}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label>Email:</label>
           <input
             type="email"
-            id="email"
+            value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label>Password:</label>
           <input
             type="password"
-            id="password"
+            value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <button className="login-btn" type="submit">
-          {loading ? "Loading..." : "Login"}
+        {error && <div className="error-message">{error}</div>}
+
+        <button className="login-btn" type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
 
       <p>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
+        Don't have an account? <Link to="/signup">Sign up</Link>
       </p>
     </div>
   );

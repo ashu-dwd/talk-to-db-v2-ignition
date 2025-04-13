@@ -1,47 +1,28 @@
-import ChatLayout from "./Pages/ChatLayout";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./Context/authContext";
+import Navbar from "./pages/Navbar";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import HomePage from "./Pages/Home";
-import { Database } from "lucide-react";
-import "./assets/css/Nav.css";
-//import Home from "./Pages/Home";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Signup from "./Pages/Signup";
-import Login from "./Pages/Login";
-import Interface from "./Pages/Interface";
+import ChatInterface from "./pages/Interface";
+import AboutUs from "./pages/AboutUs";
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <Router>
-        <nav className="navbar">
-          <div className="logo">
-            <Database className="logo-icon" />
-            <h1>Talk to Database AI</h1>
-          </div>
-          <div className="nav-links">
-            <a href="#features">Features</a>
-            <a href="#security">Security</a>
-            <a href="#how-it-works">Working</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
-            <Link to="/login" className="login-btn">
-              Log In
-            </Link>
-            <Link to="/signup" className="signup-btn primary-btn">
-              Sign Up
-            </Link>
-          </div>
-        </nav>
-        <Routes>
-          <Route path="/" exact element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/chat" element={<ChatLayout />} />
-          <Route path="/interface/:chatRoomId" element={<Interface />} />
-          <Route path="/chat/:chatRoomId" element={<ChatLayout />} />
-        </Routes>
-      </Router>
-    </div>
+    <AuthProvider>
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        {/* Updated the route path */}
+        <Route path="/interface/:roomId" element={<ChatInterface />} />
+        <Route path="/chat" element={<ChatInterface />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </AuthProvider>
   );
-};
+}
 
 export default App;

@@ -9,21 +9,26 @@ router.post('/login', async (req, res) => {
     if (!email || !password) {
         return res.status(400).json({ message: "Email and password are required", status: "error" });
     }
+
     try {
         const result = await handleUserLogin(email, password);
+
         return res.status(200).json({
-            message: result,
             status: "success",
-            msg: "Login successful"
+            msg: result.message,
+            user: result.user,
+            token: result.token
         });
     } catch (error) {
         console.error("🔴 Error during login:", error.message);
-        return res.status(500).json({
-            message: "Internal server error",
+
+        return res.status(error.statusCode || 500).json({
+            message: error.message || "Internal server error",
             status: "error"
         });
     }
 });
+
 
 // Signup Route
 router.post('/signup', async (req, res) => {

@@ -10,7 +10,7 @@ import {
   faStop,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Interface() {
+function ChatInterface() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -355,4 +355,4 @@ function Interface() {
   );
 }
 
-export default Interface;
+export default ChatInterface;

@@ -1,0 +1,201 @@
+/* AboutUs.css */
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  color: #333;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-header h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1a202c;
+}
+
+.about-tagline {
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #4a5568;
+}
+
+.team-section {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  margin-bottom: 60px;
+}
+
+.team-member {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.team-member.reverse {
+  flex-direction: row-reverse;
+}
+
+.member-image-container {
+  flex: 0 0 300px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.member-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.member-image-container:hover .member-image {
+  transform: scale(1.05);
+}
+
+.member-info {
+  flex: 1;
+}
+
+.member-info h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2d3748;
+}
+
+.member-info h3 {
+  font-size: 18px;
+  color: #3b82f6;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.member-info p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #4a5568;
+}
+
+.member-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.social-link {
+  color: #3b82f6;
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  padding-bottom: 2px;
+}
+
+.social-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3b82f6;
+  transition: width 0.3s ease;
+}
+
+.social-link:hover::after {
+  width: 100%;
+}
+
+.company-values {
+  background-color: #f7fafc;
+  padding: 40px;
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+.company-values h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2d3748;
+}
+
+.company-values p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4a5568;
+  margin-bottom: 20px;
+}
+
+.company-values p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .team-member,
+  .team-member.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .member-image-container {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .member-social {
+    justify-content: center;
+  }
+
+  .about-header {
+    margin-bottom: 40px;
+  }
+
+  .team-section {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-container {
+    padding: 40px 16px;
+  }
+
+  .about-header h1 {
+    font-size: 36px;
+  }
+
+  .about-tagline {
+    font-size: 16px;
+  }
+
+  .member-info h2 {
+    font-size: 24px;
+  }
+
+  .member-info h3 {
+    font-size: 16px;
+  }
+
+  .company-values {
+    padding: 30px 20px;
+  }
+}

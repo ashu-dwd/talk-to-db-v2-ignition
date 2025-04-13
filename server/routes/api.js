@@ -16,10 +16,14 @@ router.post('/chat/:roomId', async (req, res) => {
         // }
         const generatedQuery = await handleUserRequest(userQuery);
         console.log("Generated Query:", generatedQuery);
-        if (generatedQuery.message.length > 10) {
+        if (generatedQuery.message.length > 30) {
             const finalResponse = {
                 mainOutput: generatedQuery.message,
             }
+            const chat = await Chat.create({
+                userQuery: userQuery,
+                genQuery: generatedQuery.message,
+            });
             res.json({ finalResponse, roomId });
         }
         const sqlResult = await queryFunction(generatedQuery);
