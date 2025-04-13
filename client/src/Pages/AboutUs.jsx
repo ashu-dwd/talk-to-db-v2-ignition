@@ -23,18 +23,26 @@ function AboutUs() {
           </div>
           <div className="member-info">
             <h2>Utkrisht Patel </h2>
-            <h3>  Frontend web Developer</h3>
-            <p> Passionate Computer science student with a strong foundation in Programming and a keen interest in technology. I'm adept at leveraging my technical skills to tackle real- world challenges.
-
-skills that I am excellent at required for frontend development are HTML, CSS and JavaScript . And also excellent knowledge of C programming language. 
-
-I demonstrate strong analysis and problem - solving abilities by effective communication and teamwork skills. I have participated in many hackathons and my team was a winner in PACS. I along with my team, also carry out independent projects. I am excited to leverage my knowledge and enthusiasm to contribute to impactful projects and grow within a dynamic and forward - thinking organization.
-
-              
+            <h3> Frontend web Developer</h3>
+            <p>
+              {" "}
+              Passionate Computer science student with a strong foundation in
+              Programming and a keen interest in technology. I'm adept at
+              leveraging my technical skills to tackle real- world challenges.
+              skills that I am excellent at required for frontend development
+              are HTML, CSS and JavaScript . And also excellent knowledge of C
+              programming language. I demonstrate strong analysis and problem -
+              solving abilities by effective communication and teamwork skills.
+              I have participated in many hackathons and my team was a winner in
+              PACS. I along with my team, also carry out independent projects. I
+              am excited to leverage my knowledge and enthusiasm to contribute
+              to impactful projects and grow within a dynamic and forward -
+              thinking organization.
             </p>
             <p>
-              Pursuing With a Master's degree in Computer Science from Gautam Buddha 
-              University, Let's connect and explore opportunities to innovate and make a difference in the tech world together!.
+              Pursuing With a Master's degree in Computer Science from Gautam
+              Buddha University, Let's connect and explore opportunities to
+              innovate and make a difference in the tech world together!.
             </p>
             <div className="member-social">
               <a href="#" className="social-link">
@@ -61,22 +69,46 @@ I demonstrate strong analysis and problem - solving abilities by effective commu
           <div className="member-info">
             <h2>Raghvendra Dwivedi ​</h2>
             <h3> Full Stack Web Developer </h3>
-            <p>  Passionate about web development, with expertise in Node.js, PHP, MySQL, and front-end technologies.
- Experienced in building interactive, user-friendly web applications. Eager to contribute to dynamic
- projects and solve real-world challenges.
+            <p>
+              <b>
+                Aspiring Web Developer | Passionate About Building Dynamic
+                Websites{" "}
+              </b>{" "}
             </p>
             <p>
-            Passionate about blogging and exploring creative topics to enhance communication skills.- Actively learning and contributing to open-source proje
+              As a fresher in the field of web development, I have hands-on
+              experience in creating interactive and responsive websites. I’ve
+              honed my skills in HTML, CSS, JavaScript, jQuery, PHP, and
+              Node.js, building projects that showcase my ability to blend
+              creativity with functionality. What I Bring: A strong foundation
+              in front-end and back-end development. A knack for solving
+              problems and learning new technologies. A portfolio of projects,
+              including an e-commerce site, chat app, or dynamic forms. I’m
+              eager to bring my skills to a professional setting, contribute to
+              innovative projects, and grow as a developer. Let’s connect and
+              create something amazing together!
             </p>
             <div className="member-social">
-              <a href="#" className="social-link">
+              <a
+                href="www.linkedin.com/in/raghav-dwd"
+                target="_blank"
+                className="social-link"
+              >
                 LinkedIn
               </a>
-              <a href="#" className="social-link">
-                Dribbble
+              <a
+                href="https://github.com/ashu-dwd"
+                target="_blank"
+                className="social-link"
+              >
+                Github
               </a>
-              <a href="#" className="social-link">
-                Twitter
+              <a
+                href="https://www.instagram.com/raghavv.dwivedi/"
+                target="_blank"
+                className="social-link"
+              >
+                Instagram
               </a>
             </div>
           </div>

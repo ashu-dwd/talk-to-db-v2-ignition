@@ -1,109 +1,120 @@
 import React, { useState, useEffect } from "react";
-import { FiClock, FiMail, FiSend } from "react-icons/fi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRocket,
+  faEnvelope,
+  faClock,
+  faChartLine,
+  faBell,
+} from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import "../assets/css/ComingSoon.css"; // We'll create this CSS file
+import "../assets/css/ComingSoon.css";
 
 const ComingSoon = () => {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-  // Set launch date (2 months from now)
-  const launchDate = new Date();
-  launchDate.setMonth(launchDate.getMonth() + 2);
-
+  // Launch in 45 days
   useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const diff = launchDate - now;
+    const timer = setInterval(() => {
+      const launchDate = new Date();
+      launchDate.setDate(launchDate.getDate() + 45);
+      const difference = launchDate - new Date();
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      setDays(days);
-      setHours(hours);
-      setMinutes(minutes);
-      setSeconds(seconds);
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      });
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the email to your backend
-    console.log("Subscribed with:", email);
+    // API call would go here
     setSubscribed(true);
     setEmail("");
   };
 
   return (
-    <div className="coming-soon-container">
-      <div className="stars"></div>
-      <div className="twinkling"></div>
+    <div className="coming-soon-premium">
+      <div className="background-shapes">
+        <div className="shape shape-1"></div>
+        <div className="shape shape-2"></div>
+        <div className="shape shape-3"></div>
+      </div>
 
       <motion.div
-        initial={{ opacity: 0, y: -50 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="content"
+        className="content-card"
       >
-        <div className="badge">
-          <FiSend className="rocket-icon" />
-          <span>Coming Soon</span>
+        <div className="header">
+          <div className="badge">
+            <FontAwesomeIcon icon={faRocket} className="icon" />
+            <span>COMING SOON</span>
+          </div>
+          <h1>Revolutionary Feature Launch</h1>
+          <p className="subtitle">
+            We're building something extraordinary that will transform your
+            workflow. Join our exclusive waitlist for early access.
+          </p>
         </div>
 
-        <h1>Our Next Generation Feature is Launching Soon!</h1>
-        <p className="subtitle">
-          We're working hard to bring you an amazing new experience. Stay tuned
-          for updates and be the first to try it out!
-        </p>
-
-        <div className="countdown">
-          <div className="countdown-item">
-            <span className="number">{days}</span>
-            <span className="label">Days</span>
-          </div>
-          <div className="countdown-item">
-            <span className="number">{hours}</span>
-            <span className="label">Hours</span>
-          </div>
-          <div className="countdown-item">
-            <span className="number">{minutes}</span>
-            <span className="label">Minutes</span>
-          </div>
-          <div className="countdown-item">
-            <span className="number">{seconds}</span>
-            <span className="label">Seconds</span>
+        <div className="countdown-container">
+          <div className="countdown">
+            <div className="countdown-item">
+              <span className="number">{timeLeft.days}</span>
+              <span className="label">Days</span>
+            </div>
+            <div className="countdown-separator">:</div>
+            <div className="countdown-item">
+              <span className="number">{timeLeft.hours}</span>
+              <span className="label">Hours</span>
+            </div>
+            <div className="countdown-separator">:</div>
+            <div className="countdown-item">
+              <span className="number">{timeLeft.minutes}</span>
+              <span className="label">Minutes</span>
+            </div>
+            <div className="countdown-separator">:</div>
+            <div className="countdown-item">
+              <span className="number">{timeLeft.seconds}</span>
+              <span className="label">Seconds</span>
+            </div>
           </div>
         </div>
 
         {!subscribed ? (
           <motion.form
-            onSubmit={handleSubmit}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.3 }}
+            onSubmit={handleSubmit}
             className="subscribe-form"
           >
             <div className="input-group">
-              <FiMail className="input-icon" />
+              <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email for updates"
+                placeholder="Enter your email"
                 required
               />
             </div>
-            <button type="submit" className="subscribe-button">
+            <button type="submit" className="subscribe-btn">
+              <FontAwesomeIcon icon={faBell} className="btn-icon" />
               Notify Me
             </button>
           </motion.form>
@@ -113,25 +124,25 @@ const ComingSoon = () => {
             animate={{ opacity: 1 }}
             className="success-message"
           >
-            <h3>Thank you for subscribing!</h3>
-            <p>We'll notify you as soon as we launch.</p>
+            <h3>You're on the list!</h3>
+            <p>We'll notify you when we launch.</p>
           </motion.div>
         )}
 
-        <div className="progress-container">
-          <div className="progress-label">
-            <FiClock className="progress-icon" />
+        <div className="progress-section">
+          <div className="progress-header">
+            <FontAwesomeIcon icon={faChartLine} className="progress-icon" />
             <span>Development Progress</span>
           </div>
           <div className="progress-bar">
             <motion.div
               className="progress-fill"
               initial={{ width: 0 }}
-              animate={{ width: "75%" }}
-              transition={{ duration: 2, delay: 0.5 }}
+              animate={{ width: "82%" }}
+              transition={{ duration: 1.5, delay: 0.5 }}
             />
           </div>
-          <span className="progress-percentage">75%</span>
+          <span className="progress-percent">82%</span>
         </div>
       </motion.div>
     </div>
