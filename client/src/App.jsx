@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import HomePage from "./Pages/Home";
 import ChatInterface from "./pages/Interface";
 import AboutUs from "./pages/AboutUs";
+import ComingSoon from "./Pages/ComingSoon";
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
         <Route path="/chat" element={<ChatInterface />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<ComingSoon />} />
+        <Route path="/profile" element={<ComingSoon />} />
+        <Route path="/settings" element={<ComingSoon />} />
+        <Route path="/features" element={<ComingSoon />} />
+        <Route path="/pricing" element={<ComingSoon />} />
       </Routes>
     </AuthProvider>
   );

@@ -184,7 +184,7 @@ const styles = `
 .nav-link {
   position: relative;
   text-decoration: none;
-  color: var(--text-color);
+  color:  black;
   font-weight: 500;
   font-size: 1.1rem;
   transition: var(--transition);
