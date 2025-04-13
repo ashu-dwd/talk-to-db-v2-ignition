@@ -16,26 +16,25 @@ function AboutUs() {
         <div className="team-member">
           <div className="member-image-container">
             <img
-              src="/api/placeholder/400/400"
-              alt="Alex Johnson"
+              src="/utkrisht.png.jpg"
+              alt="Utkrisht Patel"
               className="member-image"
             />
           </div>
           <div className="member-info">
-            <h2>Alex Johnson</h2>
-            <h3>Co-Founder & Lead Developer</h3>
-            <p>
-              Alex has over 8 years of experience in database architecture and
-              full-stack development. After facing persistent challenges with
-              database interactions in previous roles, Alex was inspired to
-              create a solution that would make database management more
-              accessible.
+            <h2>Utkrisht Patel </h2>
+            <h3>  Frontend web Developer</h3>
+            <p> Passionate Computer science student with a strong foundation in Programming and a keen interest in technology. I'm adept at leveraging my technical skills to tackle real- world challenges.
+
+skills that I am excellent at required for frontend development are HTML, CSS and JavaScript . And also excellent knowledge of C programming language. 
+
+I demonstrate strong analysis and problem - solving abilities by effective communication and teamwork skills. I have participated in many hackathons and my team was a winner in PACS. I along with my team, also carry out independent projects. I am excited to leverage my knowledge and enthusiasm to contribute to impactful projects and grow within a dynamic and forward - thinking organization.
+
+              
             </p>
             <p>
-              With a Master's degree in Computer Science from Stanford
-              University, Alex combines academic knowledge with practical
-              experience to drive the technical direction of TalkToDB. When not
-              coding, Alex enjoys hiking and playing chess.
+              Pursuing With a Master's degree in Computer Science from Gautam Buddha 
+              University, Let's connect and explore opportunities to innovate and make a difference in the tech world together!.
             </p>
             <div className="member-social">
               <a href="#" className="social-link">
@@ -54,27 +53,20 @@ function AboutUs() {
         <div className="team-member reverse">
           <div className="member-image-container">
             <img
-              src="/api/placeholder/400/400"
-              alt="Sam Rivera"
+              src="/ashu.jpg"
+              alt="Raghvendra Dwivedi"
               className="member-image"
             />
           </div>
           <div className="member-info">
-            <h2>Sam Rivera</h2>
-            <h3>Co-Founder & UI/UX Lead</h3>
-            <p>
-              Sam brings 6 years of specialized experience in UI/UX design with
-              a focus on creating intuitive interfaces for complex technical
-              products. With a background in cognitive psychology and
-              human-computer interaction, Sam ensures that TalkToDB remains
-              user-friendly despite its powerful capabilities.
+            <h2>Raghvendra Dwivedi ​</h2>
+            <h3> Full Stack Web Developer </h3>
+            <p>  Passionate about web development, with expertise in Node.js, PHP, MySQL, and front-end technologies.
+ Experienced in building interactive, user-friendly web applications. Eager to contribute to dynamic
+ projects and solve real-world challenges.
             </p>
             <p>
-              Prior to co-founding TalkToDB, Sam worked with several tech
-              startups to improve their user experience design processes. Sam
-              holds a degree in Human-Computer Interaction from Carnegie Mellon
-              University and enjoys photography and electronic music production
-              in free time.
+            Passionate about blogging and exploring creative topics to enhance communication skills.- Actively learning and contributing to open-source proje
             </p>
             <div className="member-social">
               <a href="#" className="social-link">
