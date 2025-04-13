@@ -36,6 +36,13 @@ function Login() {
         const roomId = nanoid(10);
         localStorage.setItem("roomId", roomId);
         navigate(`/interface/${roomId}`);
+        const savingRoomToDb = await axios.post(
+          "http://localhost:5000/user/room",
+          {
+            roomId,
+            userId: user._id,
+          }
+        );
       } else {
         setError(message || "Login failed. Please check your credentials.");
       }

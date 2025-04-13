@@ -372,9 +372,9 @@ const HomePage = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="primary-btn">
+                <a className="primary-btn" href="mailto:dwivediji425@gmail.com">
                   Schedule Demo
-                </button>
+                </a>
               </div>
             </form>
           </div>
@@ -455,20 +455,9 @@ const HomePage = () => {
               <a href="#">Case Studies</a>
             </div>
             <div className="footer-column">
-              <h4>Resources</h4>
-              <a href="#">Integration Docs</a>
-              <a href="#">API Reference</a>
-              <a href="#">Developer Guide</a>
-              <a href="#">Support Portal</a>
-              <a href="#">System Requirements</a>
-            </div>
-            <div className="footer-column">
               <h4>Company</h4>
-              <a href="#">About Us</a>
-              <a href="#">Engineering Team</a>
-              <a href="#">Partner Program</a>
-              <a href="#">Contact Sales</a>
-              <a href="#">Careers</a>
+              <a href="/about-us">About Us</a>
+              <a href="/about-us">Engineering Team</a>
             </div>
           </div>
         </div>

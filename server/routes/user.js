@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { handleUserLogin, handleUserRegistration } = require('../controllers/user');
+const Room = require('../models/room');
 
 // Login Route
 router.post('/login', async (req, res) => {
@@ -53,5 +54,16 @@ router.post('/signup', async (req, res) => {
         });
     }
 });
+
+router.post('/room', async (req, res) => {
+    console.log(req.body);
+    const room = req.body.roomId;
+    const roomCreater = req.body.userId;
+    const result = await Room.create({
+        roomId: room,
+        userId: roomCreater
+    });
+    res.status(200).json({ result });
+})
 
 module.exports = router;
